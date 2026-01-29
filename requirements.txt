@@ -1,0 +1,10 @@
+numpy
+pandas
+scikit-learn
+mlflow
+huggingface_hub
+streamlit
+joblib
+matplotlib
+seaborn
+plotly
