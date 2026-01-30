@@ -58,3 +58,29 @@ def _clean_data(df: pd.DataFrame) -> pd.DataFrame:
     df[config.TARGET_COLUMN] = df[config.TARGET_COLUMN].astype(int)
 
     return df
+
+
+def _train_test_split(
+    df: pd.DataFrame,
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Split the cleaned dataframe into train and test sets.
+    """
+    X = df[config.FEATURE_COLUMNS]
+    y = df[config.TARGET_COLUMN]
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X,
+        y,
+        test_size=config.TEST_SIZE,
+        random_state=config.RANDOM_STATE,
+        stratify=y,
+    )
+
+    train_df = X_train.copy()
+    train_df[config.TARGET_COLUMN] = y_train
+
+    test_df = X_test.copy()
+    test_df[config.TARGET_COLUMN] = y_test
+
+    return train_df, test_df
